@@ -15,6 +15,16 @@ app.get('/', (req, res) => {
     res.status(200).send(`${req.cohete} Bienvenido a Hack a News ${req.cohete}`);
 });
 
+//*Middleware Error 404: not found
+app.use((req, res) => {
+    res.status(404).send({
+        ok: false,
+        data: null,
+        error: null,
+        message: '404: not found'
+    });
+});
+
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en el puerto ${PORT}`);
 
