@@ -2,12 +2,13 @@ const { log } = require('console');
 const sendQuery = require('../../db/connecToDB');
 const newUserSchema = require('../../schemas/newUserSchema');
 const bcrypt = require('bcrypt');
+const error = require('../../helpers/createError');
 
 
 function addUser(req, res, next) {  // funcion que manda los datos a la base de datos
 
     const { error } = newUserSchema.validate(req.body);
-    if (error) {   //! PENDIENTE DE CREAR ERROR PERSONALIZADO
+    if (error) {
         return next(createError(400, error.message));
     }
 
@@ -40,7 +41,7 @@ function addUser(req, res, next) {  // funcion que manda los datos a la base de 
 
 
     catch (error) {
-        return next(createError(500, error.message));  //! PENDIENTE DE CREAR ERROR PERSONALIZADO
+        return next(createError(500, error.message));
     }
 
 }
@@ -48,4 +49,4 @@ function addUser(req, res, next) {  // funcion que manda los datos a la base de 
 
 
 
-
+module.export = addUser;

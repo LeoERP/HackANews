@@ -3,8 +3,12 @@ const app = express();
 const PORT = 3000;
 const hackanews = require('hackanews');
 
+const usersRouter = require('./routes/usersRouter');
+
 app.use(hackanews);
 app.use(express.json());
+
+app.use("/users", usersRouter);
 
 app.use((req, res, next) => {
     console.log('Pasa una petición.');
