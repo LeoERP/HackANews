@@ -3,6 +3,7 @@ const sendQuery = require('../../db/connecToDB');
 const newUserSchema = require('../../schemas/newUserSchema');
 const bcrypt = require('bcrypt');
 const error = require('../../helpers/createError');
+const jwt = require('jsonwebtoken');
 
 
 function addUser(req, res, next) {  // funcion que manda los datos a la base de datos
