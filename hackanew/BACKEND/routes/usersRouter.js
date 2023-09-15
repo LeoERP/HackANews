@@ -1,0 +1,1 @@
+usersRouter.post('/login', loginUser);
