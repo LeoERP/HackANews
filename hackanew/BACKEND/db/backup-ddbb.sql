@@ -14,13 +14,13 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema mydb
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `newsdb` DEFAULT CHARACTER SET utf8 ;
+USE `newsdb` ;
 
 -- -----------------------------------------------------
 -- Table `mydb`.`users`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`users` (
+CREATE TABLE IF NOT EXISTS `newsdb`.`users` (
   `user_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_name` VARCHAR(45) NOT NULL,
   `user_email` VARCHAR(100) NOT NULL,
@@ -39,7 +39,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mydb`.`themes`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`themes` (
+CREATE TABLE IF NOT EXISTS `newsdb`.`themes` (
   `themes_id` INT NOT NULL,
   `celebrities` VARCHAR(45) NOT NULL,
   `premiers` VARCHAR(45) NOT NULL,
@@ -54,7 +54,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mydb`.`news`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`news` (
+CREATE TABLE IF NOT EXISTS `newsdb`.`news` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `new_title` VARCHAR(100) NOT NULL,
   `new_pic` VARCHAR(100) NULL,
@@ -73,12 +73,12 @@ CREATE TABLE IF NOT EXISTS `mydb`.`news` (
   INDEX `fk_news_themes1_idx` (`themes_themes_id` ASC) VISIBLE,
   CONSTRAINT `fk_news_users`
     FOREIGN KEY (`users_user_id`)
-    REFERENCES `mydb`.`users` (`user_id`)
+    REFERENCES `newsdb`.`users` (`user_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_news_themes1`
     FOREIGN KEY (`themes_themes_id`)
-    REFERENCES `mydb`.`themes` (`themes_id`)
+    REFERENCES `newsdb`.`themes` (`themes_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
