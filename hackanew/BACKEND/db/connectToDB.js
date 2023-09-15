@@ -1,7 +1,6 @@
 const mysql = require ('mysql2/promise')
-const dot = require("dotenv").config()
+require('dotenv').config();
 
-console.log(dot)
 
 //const { MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE } = process.env
 
@@ -11,8 +10,8 @@ const getConnection = async () => {
     pool = mysql.createPool({
       host: process.env.MYSQL_HOST,
       user: process.env.MYSQL_USER,
-      password: "MesoirO__78",
-      database: "newsdb",
+      password: process.env.MYSQL_PASSWORD,
+      database: process.env.MYSQL_DATABASE,
       timezone: "local",
       connectionLimit: 10,
     })
