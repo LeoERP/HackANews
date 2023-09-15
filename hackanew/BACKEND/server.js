@@ -4,11 +4,13 @@ const PORT = 3000;
 const hackanews = require('hackanews');
 
 const usersRouter = require('./routes/usersRouter');
+const entriesRouter = require('./routes/entriesRouter.js');
 
 app.use(hackanews);
 app.use(express.json());
 
 app.use("/users", usersRouter);
+app.use("/entries", entriesRouter);
 
 app.use((req, res, next) => {
     console.log('Pasa una petición.');
@@ -22,4 +24,14 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en el puerto ${PORT}`);
 
-})
+});
+
+
+app.use((req, res) => {             //* 404 => PARA LAS RUTAS NO ENCONTRADAS MANDA ESTE ERROR
+    res.status(404).send({
+        ok: false,
+        data: null,
+        error: null,
+        message: 'Página no encontrada en nuestro foro, prueba de nuevo.'
+    });
+});
