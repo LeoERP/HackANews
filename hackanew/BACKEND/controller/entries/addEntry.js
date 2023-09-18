@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 
-const Joi = require('Joi');
+const Joi = require('joi');
 const createError = require('../../helpers/createError');
 const sendQuery = require('../../db/connectToDB');
 
@@ -29,10 +29,13 @@ async function addEntry(req, res, next) {
     try {
         await sendQuery(
             `INSERT INTO entries 
-            (user_id, title, entrance, text, theme, pic, video) 
-            VALUES ('${user_id}', '${new_title}', '${new_entrance}', '${new_text}', '${new_theme}', '${new_pic}', '${new_video}')`);
+            (user_id, new_title, new_entrance, new_text, new_theme, new_pic, new_video) 
+            VALUES (?, ?, ?, ?, ?, ?, ?);`, [user_id, new_title, new_entrance, new_text, new_theme, new_pic, new_video]);
 
         res.status(200).json({
+            ok: true,
+            data: null,
+            error: null,
             message: '🚀Entrada realizada correctamente🚀'
         });
     } catch (error) {
