@@ -8,7 +8,7 @@ const sendQuery = require('../../db/connectToDB');
 
 async function loginUser (req, res, next) {
     const schema = joi.object({
-        email: joi.string().required(),
+        email: joi.string().email().required(),
         password: joi.string().required()
     });
 
