@@ -1,12 +1,10 @@
 const express = require('express');
 const app = express();
 const PORT = 3000;
-const hackanews = require('hackanews');
 
-const usersRouter = require('./routes/usersRouter');
+const usersRouter = require('./routes/usersRouter.js');
 const entriesRouter = require('./routes/entriesRouter.js');
 
-app.use(hackanews);
 app.use(express.json());
 
 app.use("/users", usersRouter);

@@ -1,8 +1,8 @@
 const Joi = require('joi');
 
 const newUserSchema = Joi.object({
-    user_name: Joi.string().min(5).max(45).required().messages({
-        'string.min': 'El nombre no puede tener más de 5 caracteres',
+    user_name: Joi.string().min(3).max(45).required().messages({
+        'string.min': 'El nombre no puede tener menos de 5 caracteres',
         'string.max': 'El nombre no puede tener más de 45 caracteres',
         'any.required': 'El nombre es requerido'
     }),

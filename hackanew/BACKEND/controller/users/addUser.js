@@ -1,35 +1,35 @@
 const { log } = require('console');
-const sendQuery = require('../../db/connecToDB');
+const sendQuery = require('../../db/connectToDB');
 const newUserSchema = require('../../schemas/newUserSchema');
 const bcrypt = require('bcrypt');
-const error = require('../../helpers/createError');
-const jwt = require('jsonwebtoken');
+const createError = require('../../helpers/createError');
 
-
-function addUser(req, res, next) {  // funcion que manda los datos a la base de datos
+async function addUser(req, res, next) {  // funcion que manda los datos a la base de datos
 
     const { error } = newUserSchema.validate(req.body);
     if (error) {
         return next(createError(400, error.message));
     }
 
-    const { user_name, user_email, user_password } = req.body;
+    const { user_name, user_email, user_password } = req.body
 
 
 
     try {   //* COMPRUEBA MAIL Y USER
-        const [user_name] = await sendQuery('SELECT name FROM users WHERE name = ?', [user_name]);
-        if (user_name) {
-            return next(createError(409, 'El nombre de usuario ya existe'));
+        const [username] = await sendQuery('SELECT user_name FROM users WHERE user_name = ?', [user_name]);
+        if (username) {
+            const error = createError(409, 'El nombre de usuario ya existe')
+            return next(error);
         }
-        const [user_email] = await sendQuery('SELECT email FROM users WHERE email = ?', [user_email]);
-        if (user_email) {
-            return next(createError(409, 'El email ya existe'));
+        const [useremail] = await sendQuery('SELECT user_email FROM users WHERE user_email = ?', [user_email]);
+        if (useremail) {
+            const error = createError(409, "El email ya existe")
+            return next(error);
         }
         const hashedPassword = await bcrypt.hash(user_password, 10);
-        const result = await sendQuery('INSERT INTO users (name, email, password) VALUES (?, ?, ?)', [user_name, user_email, hashedPassword]);
+        const result = await sendQuery('INSERT INTO users (user_name, user_email, user_password) VALUES (?, ?, ?)', [user_name, user_email, hashedPassword]);
 
-        console.log(result);
+        //console.log(result);
 
         res.send({
             status: 'success',
@@ -47,7 +47,4 @@ function addUser(req, res, next) {  // funcion que manda los datos a la base de 
 
 }
 
-
-
-
-module.export = addUser;
+module.exports = addUser

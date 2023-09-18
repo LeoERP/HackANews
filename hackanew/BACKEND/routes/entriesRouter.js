@@ -1,15 +1,14 @@
 const express = require('express');
-const router = express.Router();
+const entriesRouter = express.Router();
 
 const authUser = require('../middlewares/authUser');
-const addEntry = require('../controllers/entries/addEntry');
+const addEntry = require('../controller/entries/addEntry.js')
+
+
+// router.get('/', __________);    //!COMPLETAR PARTE DE MOSTRAR LAS ENTRADAS DE FORO
+entriesRouter.post('/', authUser, addEntry);
+// router.delete('/:entryId', authUser, ___________);  //! PARA ELIMINAR LAS ENTRADAS DE FORO
 
 
 
-router.get('/', __________);    //!COMPLETAR PARTE DE MOSTRAR LAS ENTRADAS DE FORO
-router.post('/', authUser, addEntry);
-router.delete('/:entryId', authUser, ___________);  //! PARA ELIMINAR LAS ENTRADAS DE FORO
-
-
-
-module.export = entriesRouter;
+module.exports = entriesRouter;
