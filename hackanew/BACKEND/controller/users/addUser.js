@@ -1,4 +1,4 @@
-const { log } = require('console');
+
 const sendQuery = require('../../db/connectToDB');
 const newUserSchema = require('../../schemas/newUserSchema');
 const bcrypt = require('bcrypt');

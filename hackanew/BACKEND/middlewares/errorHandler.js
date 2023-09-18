@@ -5,6 +5,6 @@ const errorHandler = (error, req, res, next) => {
     status: error.status,
     message: error.message
   })
-}
+};
 
-module.exports = { errorHandler }
+module.exports = errorHandler

@@ -4,6 +4,7 @@ const PORT = 3000;
 
 const usersRouter = require('./routes/usersRouter.js');
 const entriesRouter = require('./routes/entriesRouter.js');
+const errorHandler = require('./middlewares/errorHandler.js');
 
 app.use(express.json());
 
@@ -18,6 +19,8 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => {
     res.status(200).send(`${req.cohete} Bienvenido a Hack a News ${req.cohete}`);
 });
+
+app.use(errorHandler);
 
 //*Middleware Error 404: not found
 app.use((req, res) => {
