@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const createError = require('../../helpers/createError');
 const sendQuery = require('../../db/connectToDB');
 
-async function loginUser (req, res, next) {
+async function loginUser(req, res, next) {
     const schema = joi.object({
         email: joi.string().email().required(),
         password: joi.string().required()
@@ -15,9 +15,9 @@ async function loginUser (req, res, next) {
     try {
         await schema.validateAsync(req.body);
     } catch (error) {
-        return next(createError(400, 'Datos Incorrectos')); 
+        return next(createError(400, 'Datos Incorrectos'));
     }
-    
+
     const { email, password } = req.body;
 
     try {
@@ -30,17 +30,15 @@ async function loginUser (req, res, next) {
             return next(createError(401, 'Email o Password son inválidos'));
         }
 
-        if (!user.active) {
-            return next(createError(403, 'Verifique su correo para activar su cuenta'));
-        }
+
 
         const infoUser = {
             userId: user.user_id,
             userName: user.user_name
         };
 
-        const token = jwt.sign(infoUser, process.env.SECRET_KEY, { expiresIn: '1h' });
-        
+        const token = jwt.sign(infoUser, process.env.SECRET_KEY, { expiresIn: '1d' });
+
         res.header({ 'x-access-token': token });
 
         res.send({
