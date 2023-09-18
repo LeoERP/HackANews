@@ -34,12 +34,3 @@ app.listen(PORT, () => {
 
 });
 
-
-app.use((req, res) => {             //* 404 => PARA LAS RUTAS NO ENCONTRADAS MANDA ESTE ERROR
-    res.status(404).send({
-        ok: false,
-        data: null,
-        error: null,
-        message: 'Página no encontrada en nuestro foro, prueba de nuevo.'
-    });
-});
