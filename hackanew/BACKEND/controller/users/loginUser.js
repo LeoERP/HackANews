@@ -35,7 +35,7 @@ async function loginUser (req, res, next) {
         }
 
         const infoUser = {
-            userId: user.user_id
+            userId: user.user_id,
             userName: user.user_name
         };
 
