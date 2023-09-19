@@ -34,12 +34,12 @@ async function loginUser(req, res, next) {
 
         const infoUser = {
             userId: user.user_id,
-            userName: user.user_name
+            user_name: user.user_name
         };
 
         const token = jwt.sign(infoUser, process.env.SECRET_KEY, { expiresIn: '1d' });
 
-        res.header({ 'x-access-token': token });
+        res.header({ 'authorization': token });
 
         res.send({
             ok: true,

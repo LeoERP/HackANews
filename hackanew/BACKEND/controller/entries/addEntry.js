@@ -7,8 +7,9 @@ const sendQuery = require('../../db/connectToDB');
 
 async function addEntry(req, res, next) {
 
-    const { user_id } = req.users; //saca la info del usuario
-
+    const { userId } = req.user; //saca la info del usuario
+    console.log(req.user);
+    console.log(userId);
     const schema = Joi.object({
         new_title: Joi.string().required(),
         new_entrance: Joi.string().required(),
@@ -28,9 +29,9 @@ async function addEntry(req, res, next) {
     const { new_title, new_entrance, new_text, new_theme, new_pic, new_video } = req.body;
     try {
         await sendQuery(
-            `INSERT INTO entries 
-            (user_id, new_title, new_entrance, new_text, new_theme, new_pic, new_video) 
-            VALUES (?, ?, ?, ?, ?, ?, ?);`, [user_id, new_title, new_entrance, new_text, new_theme, new_pic, new_video]);
+            `INSERT INTO news 
+            (id, new_title, new_entrance, new_text, new_theme, new_pic, new_video) 
+            VALUES (?, ?, ?, ?, ?, ?, ?);`, [userId, new_title, new_entrance, new_text, new_theme, new_pic, new_video]);
 
         res.status(200).json({
             ok: true,
