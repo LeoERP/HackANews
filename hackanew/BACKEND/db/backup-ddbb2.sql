@@ -18,6 +18,8 @@
 --
 -- Table structure for table `news`
 --
+CREATE SCHEMA IF NOT EXISTS `newsdb` DEFAULT CHARACTER SET utf8 ;
+USE `newsdb` ;
 
 DROP TABLE IF EXISTS `news`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
